@@ -2,7 +2,6 @@ from datetime import timedelta
 import cftime
 import xarray 
 
-# from .GcmData import GcmData
 from . import GcmData
 from .GcmDataLoader import GcmDataLoader
 
@@ -11,8 +10,6 @@ class GcmDataLoaderExocam(GcmDataLoader):
     def __init__(
         self,
         id,
-        # path_base='{id}',
-        # path_pattern='atm/hist/{id}.cam.h0.*.nc',
         path='{id}/atm/hist/{id}.cam.h0.*.nc',
         keep_vars=[
             'gw',
@@ -31,8 +28,6 @@ class GcmDataLoaderExocam(GcmDataLoader):
     ):   
         super().__init__(
             id,
-            # path_base=path_base,
-            # path_pattern=path_pattern,
             path=path,
             keep_vars=keep_vars
         )

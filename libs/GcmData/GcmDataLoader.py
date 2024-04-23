@@ -1,7 +1,5 @@
 from dask.diagnostics import ProgressBar
 from datetime import timedelta
-# from pathlib import Path
-# import inspect
 import numpy as np
 import xarray
 
@@ -12,15 +10,10 @@ class GcmDataLoader():
     def __init__(
         self,
         id,
-        # path_base='',
-        # path_pattern='',
         path='',
         keep_vars=[]
     ):
         self.id = id
-
-        # if len(str(path)) == 0:
-        #    path = Path(path_base, path_pattern)
 
         self.path = str(path).format(id=id)
         self.keep_vars = keep_vars
@@ -43,17 +36,14 @@ class GcmDataLoader():
         var_attrs = self.var_attrs()
         for v in var_map:
             mapping = var_map[v]
-            # source = inspect.getsource(mapping)
             if type(mapping) == str:
                 mapping = lambda x: x[var_map[v]]
-                # source = mapping
 
             data = data.assign({ v: mapping })
             if v in var_attrs:
                 data[v].attrs = {}
                 data[v] = data[v].assign_attrs({
-                    **var_attrs[v],
-                    # 'variable_old': source
+                    **var_attrs[v]
                 })
 
         # Only keep standardised variables
