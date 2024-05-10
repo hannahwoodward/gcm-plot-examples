@@ -3,7 +3,7 @@ from datetime import timedelta
 import numpy as np
 import xarray
 
-from . import GcmData
+from . import GcmUtilsAccessor
 
 
 class GcmDataLoader():

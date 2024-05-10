@@ -2,7 +2,6 @@ from datetime import timedelta
 import cftime
 import xarray 
 
-from . import GcmData
 from .GcmDataLoader import GcmDataLoader
 
 

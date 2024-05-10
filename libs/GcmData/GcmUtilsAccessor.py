@@ -6,8 +6,8 @@ import numpy as np
 import xarray
 
 # https://docs.xarray.dev/en/stable/internals/extending-xarray.html
-@xarray.register_dataset_accessor('gcm_data')
-class GcmDataAccessor:
+@xarray.register_dataset_accessor('gcm_utils')
+class GcmUtilsAccessor:
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
 
@@ -27,23 +27,23 @@ class GcmDataAccessor:
         with ProgressBar():
             write.compute()
 
-    def slice_orbits(self, start, end):
-        data = self._obj.copy()
+    # def slice_orbits(self, start, end):
+    #     data = self._obj.copy()
         
-        time_start = data.time.values[0] + timedelta(days=start)
-        time_end = time_start + timedelta(days=(end - start))
-        data_slice = data.sel(time=slice(time_start, time_end))
+    #     time_start = data.time.values[0] + timedelta(days=start)
+    #     time_end = time_start + timedelta(days=(end - start))
+    #     data_slice = data.sel(time=slice(time_start, time_end))
 
-        return data_slice
+    #     return data_slice
 
-    def slice_orbits_last(self, x):
-        data = self._obj.copy()
+    # def slice_orbits_last(self, x):
+    #     data = self._obj.copy()
         
-        time_end = data.time.values[-1]
-        time_start = time_end - timedelta(days=x)
-        data_sliced = data.sel(time=slice(time_start, time_end))
+    #     time_end = data.time.values[-1]
+    #     time_start = time_end - timedelta(days=x)
+    #     data_sliced = data.sel(time=slice(time_start, time_end))
 
-        return data_sliced
+    #     return data_sliced
 
     def regrid_data(
         self,
