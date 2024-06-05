@@ -7,6 +7,7 @@ import xarray
 
 # https://docs.xarray.dev/en/stable/internals/extending-xarray.html
 @xarray.register_dataset_accessor('gcm_utils')
+@xarray.register_dataarray_accessor('gcm_utils')
 class GcmUtilsAccessor:
     def __init__(self, xarray_obj):
         self._obj = xarray_obj
